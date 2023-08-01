@@ -271,5 +271,46 @@ namespace Sistema2023.Datos
             }
             return Rpta;
         }
+
+        public string Existe(string Valor)
+        {
+            //string Rpta = "";
+            //Variable para establecer conexion con la BBDD
+            SqlConnection SqlCon = new SqlConnection();
+            try
+            {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                SqlCommand cmd = new SqlCommand("categoria_existe", SqlCon);
+                //Ejecutamos procedimiento almacenado
+                cmd.CommandType = CommandType.StoredProcedure;
+                //Enviamos parametros al procedimiento
+                //Parametro de entrada
+                cmd.Parameters.Add("@valor", SqlDbType.VarChar).Value = Valor;
+                //Parametro de salida
+                SqlParameter ParExiste = new SqlParameter();
+                ParExiste.ParameterName = "@existe";
+                ParExiste.SqlDbType = SqlDbType.Int;
+                ParExiste.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(ParExiste);
+                //Abtimos la conexion
+                SqlCon.Open();
+                //Ejecutamos el comando
+                cmd.ExecuteNonQuery();
+                //Obtenemos respuesta
+                Rpta = ParExiste.Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                Rpta = ex.Message;
+            }
+            finally
+            {
+                //Compruebo si la conexion esta abierta
+                if (SqlCon.State == ConnectionState.Open)
+                    SqlCon.Close();
+            }
+            return Rpta;
+
+        }
     }
 }
