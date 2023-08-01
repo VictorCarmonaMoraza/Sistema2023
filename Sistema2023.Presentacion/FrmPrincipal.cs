@@ -103,5 +103,25 @@ namespace Sistema2023.Presentacion
                 childForm.Close();
             }
         }
+
+        private void almacenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripStatusLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void categoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Instanciamos el formulario de Categoria desde el boton Almacen/Categoria
+            FrmCategoria frm = new FrmCategoria();
+            //Le decimos que el formuarlio principla es en el que nos encontramos que en este caso en FrmPrincipal
+            frm.MdiParent = this;
+            //Mostramos el formulario de Categoria
+            frm.Show();
+        }
     }
 }
