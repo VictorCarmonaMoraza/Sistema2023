@@ -5,16 +5,24 @@ using System.Data.SqlClient;
 
 namespace Sistema2023.Datos
 {
+
     public class DCategoria
     {
+        //Propiedades
+        private SqlDataReader Resultado = null;
+        private DataTable Tabla = null;
+        private string Rpta = "";
+
+
         /// <summary>
         /// Listado de categorias
         /// </summary>
         /// <returns>Listado de categorias</returns>
         public DataTable Listar()
         {
-            SqlDataReader Resultado = null;
-            DataTable Tabla  = new DataTable();
+            //SqlDataReader Resultado = null;
+            //DataTable Tabla  = new DataTable();
+            Tabla = new DataTable();
             //Variable para establecer conexion con la BBDD
             SqlConnection SqlCon = new SqlConnection();
             try
@@ -48,8 +56,9 @@ namespace Sistema2023.Datos
         /// <returns>listado de categoria encontrado</returns>
         public DataTable Buscar(string valor)
         {
-            SqlDataReader Resultado = null;
-            DataTable Tabla = new DataTable();
+            //SqlDataReader Resultado = null;
+            //DataTable Tabla = new DataTable();
+            Tabla = new DataTable();
             //Variable para establecer conexion con la BBDD
             SqlConnection SqlCon = new SqlConnection();
             try
@@ -86,7 +95,7 @@ namespace Sistema2023.Datos
         /// <returns></returns>
         public string Insertar(Categoria categoria)
         {
-            string Rpta = "";
+            //string Rpta = "";
             //Variable para establecer conexion con la BBDD
             SqlConnection SqlCon = new SqlConnection();
             try
@@ -124,7 +133,7 @@ namespace Sistema2023.Datos
         /// <returns></returns>
         public string Actualizar(Categoria categoria)
         {
-            string Rpta = "";
+            //string Rpta = "";
             //Variable para establecer conexion con la BBDD
             SqlConnection SqlCon = new SqlConnection();
             try
@@ -162,7 +171,7 @@ namespace Sistema2023.Datos
         /// <returns></returns>
         public string Eliminar(int IdCategoria)
         {
-            string Rpta = "";
+            //string Rpta = "";
             //Variable para establecer conexion con la BBDD
             SqlConnection SqlCon = new SqlConnection();
             try
@@ -198,7 +207,7 @@ namespace Sistema2023.Datos
         /// <returns></returns>
         public string Activar(int IdCategoria)
         {
-            string Rpta = "";
+            //string Rpta = "";
             //Variable para establecer conexion con la BBDD
             SqlConnection SqlCon = new SqlConnection();
             try
@@ -234,7 +243,7 @@ namespace Sistema2023.Datos
         /// <returns></returns>
         public string Desactivar(int IdCategoria)
         {
-            string Rpta = "";
+            //string Rpta = "";
             //Variable para establecer conexion con la BBDD
             SqlConnection SqlCon = new SqlConnection();
             try
