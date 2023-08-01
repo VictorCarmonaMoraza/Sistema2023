@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sistema2023.Datos
 {
@@ -49,20 +45,22 @@ namespace Sistema2023.Datos
             try
             {
                 Cadena.ConnectionString = "Server=" + this.Servidor + "; Database=" + this.Base + ";";
-                //Si la seguridad es true es autenticacion de windows
                 if (this.Seguridad)
                 {
                     Cadena.ConnectionString = Cadena.ConnectionString + "Integrated Security = SSPI";
                 }
                 else
                 {
-                    Cadena.ConnectionString = Cadena.ConnectionString + ";User Id =" + this.Usuario + ";Password =" + this.Clave;
+                    Cadena.ConnectionString = Cadena.ConnectionString + "User Id=" + this.Usuario + "; Password=" + this.Clave;
                 }
+                //Cadena.ConnectionString = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=dbsistema;User ID=sa;Password=1234";
+                //Cadena.ConnectionString = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=dbsistema;Integrated Security=True";
             }
             catch (Exception ex)
             {
                 Cadena = null;
                 throw ex;
+
             }
             return Cadena;
         }
@@ -73,12 +71,11 @@ namespace Sistema2023.Datos
         /// <returns>Devolvemos instancia de la conexion</returns>
         public static Conexion getInstancia()
         {
-            //verificamos que tenemos la instancia
+            //Verificamos si tenemos una instancia de esta clase
             if (Con == null)
             {
                 Con = new Conexion();
             }
-            //Devolvemos la instancia
             return Con;
         }
 
