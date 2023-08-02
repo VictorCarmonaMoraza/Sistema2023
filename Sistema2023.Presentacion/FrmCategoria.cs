@@ -45,10 +45,34 @@ namespace Sistema2023.Presentacion
             DgvListado.Columns[4].Width = 450; //Columna Estado
         }
 
+
+        private void Buscar()
+        {
+            try
+            {
+                //TxtBuscar.Text contenido de la caja de Texto
+                DgvListado.DataSource = NCategoria.Buscar(TxtBuscar.Text);
+                this.Formato();
+                LblTotal.Text = "Total registros: " + Convert.ToString(DgvListado.RowCount);
+
+            }
+            catch (Exception ex)
+            {
+                //Muestra excepcion y la pila de llamada antes de la excepcion
+                //StackTrace muestra informacion de lo ocurrido
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
         private void FrmCategoria_Load(object sender, EventArgs e)
         {
             //Le decimos que cuando cargue el formulario haga referencia al metodo listar
             this.Listar();
+        }
+
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            this.Buscar();
         }
     }
 }
