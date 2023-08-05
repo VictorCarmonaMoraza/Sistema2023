@@ -70,6 +70,13 @@ namespace Sistema2023.Presentacion
             BtnActualizar.Visible = false;
             //Limpia todas las cjas de texto que se esten validando
             ErrorIcons.Clear();
+
+            //Hacemos visible la columna cero
+            DgvListado.Columns[0].Visible = false;
+            BtnActivar.Visible = false;
+            BtnDesactivar.Visible = false;
+            BtnEliminar.Visible = false;
+            ChkSeleccionar.Checked = false;
         }
 
         /// <summary>
@@ -198,17 +205,25 @@ namespace Sistema2023.Presentacion
         /// <param name="e"></param>
         private void DgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Limpiar();
-            //Hago visible boton Actualizar
-            BtnActualizar.Visible = true;
-            //Oculto boton Insertar
-            BtnInsertar.Visible = false;
-            TxtId.Text = Convert.ToString(DgvListado.CurrentRow.Cells["ID"].Value);
-            this.NombreAnt = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
-            TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
-            TxtDescripcion.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Descripcion"].Value);
-            //Pasar a la pantalla de mantenimiento
-            TabGeneral.SelectedIndex = 1;
+            try
+            {
+                this.Limpiar();
+                //Hago visible boton Actualizar
+                BtnActualizar.Visible = true;
+                //Oculto boton Insertar
+                BtnInsertar.Visible = false;
+                TxtId.Text = Convert.ToString(DgvListado.CurrentRow.Cells["ID"].Value);
+                this.NombreAnt = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
+                TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
+                TxtDescripcion.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Descripcion"].Value);
+                //Pasar a la pantalla de mantenimiento
+                TabGeneral.SelectedIndex = 1;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Seleccione desde la celda nombre.");
+            }
+
         }
 
         /// <summary>
@@ -244,6 +259,74 @@ namespace Sistema2023.Presentacion
                     {
                         this.MensajeError(Rpta);
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+                throw;
+            }
+        }
+
+        private void ChkSeleccionar_CheckedChanged(object sender, EventArgs e)
+        {
+            //Id el checkbox esta seleccionado 
+            if (ChkSeleccionar.Checked)
+            {
+                //Hacemos visible la columna cero
+                DgvListado.Columns[0].Visible = true;
+                BtnActivar.Visible = true;
+                BtnDesactivar.Visible = true;
+                BtnEliminar.Visible = true;
+            }
+            else
+            {
+                //Hacemos visible la columna cero
+                DgvListado.Columns[0].Visible = false;
+                BtnActivar.Visible = false;
+                BtnDesactivar.Visible = false;
+                BtnEliminar.Visible = false;
+            }
+        }
+
+        private void DgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == DgvListado.Columns["Seleccionar"].Index)
+            {
+                DataGridViewCheckBoxCell ChkEliminar = (DataGridViewCheckBoxCell)DgvListado.Rows[e.RowIndex].Cells["Seleccionar"];
+                ChkEliminar.Value = !Convert.ToBoolean(ChkEliminar.Value);
+            }
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas eliminar el(los) registro(s)?", "Sistema de ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (Opcion ==  DialogResult.OK)
+                {
+                    int Codigo;
+                    string Rpta = "";
+
+                    foreach(DataGridViewRow row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            Rpta = NCategoria.Eliminar(Codigo);
+
+                            if (Rpta.Equals("OK"))
+                            {
+                                this.MensajeOK("Se elimino el registro: " + Convert.ToString(row.Cells[2].Value));
+                            }
+                            else
+                            {
+                                this.MensajeError(Rpta);
+                            }
+                        }
+                    }
+                    this.Listar();
                 }
             }
             catch (Exception ex)

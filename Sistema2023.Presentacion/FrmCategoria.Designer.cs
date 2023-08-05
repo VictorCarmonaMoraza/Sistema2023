@@ -47,6 +47,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ErrorIcons = new System.Windows.Forms.ErrorProvider(this.components);
             this.BtnActualizar = new System.Windows.Forms.Button();
+            this.ChkSeleccionar = new System.Windows.Forms.CheckBox();
+            this.BtnActivar = new System.Windows.Forms.Button();
+            this.BtnDesactivar = new System.Windows.Forms.Button();
+            this.BtnEliminar = new System.Windows.Forms.Button();
             this.TabGeneral.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListado)).BeginInit();
@@ -67,6 +71,10 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Silver;
+            this.tabPage1.Controls.Add(this.BtnEliminar);
+            this.tabPage1.Controls.Add(this.BtnDesactivar);
+            this.tabPage1.Controls.Add(this.BtnActivar);
+            this.tabPage1.Controls.Add(this.ChkSeleccionar);
             this.tabPage1.Controls.Add(this.BtnBuscar);
             this.tabPage1.Controls.Add(this.TxtBuscar);
             this.tabPage1.Controls.Add(this.LblTotal);
@@ -123,6 +131,7 @@
             this.DgvListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvListado.Size = new System.Drawing.Size(1365, 302);
             this.DgvListado.TabIndex = 0;
+            this.DgvListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvListado_CellContentClick);
             this.DgvListado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvListado_CellDoubleClick);
             // 
             // Seleccionar
@@ -245,6 +254,45 @@
             this.BtnActualizar.UseVisualStyleBackColor = true;
             this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
+            // ChkSeleccionar
+            // 
+            this.ChkSeleccionar.AutoSize = true;
+            this.ChkSeleccionar.Location = new System.Drawing.Point(19, 357);
+            this.ChkSeleccionar.Name = "ChkSeleccionar";
+            this.ChkSeleccionar.Size = new System.Drawing.Size(82, 17);
+            this.ChkSeleccionar.TabIndex = 4;
+            this.ChkSeleccionar.Text = "Seleccionar";
+            this.ChkSeleccionar.UseVisualStyleBackColor = true;
+            this.ChkSeleccionar.CheckedChanged += new System.EventHandler(this.ChkSeleccionar_CheckedChanged);
+            // 
+            // BtnActivar
+            // 
+            this.BtnActivar.Location = new System.Drawing.Point(340, 357);
+            this.BtnActivar.Name = "BtnActivar";
+            this.BtnActivar.Size = new System.Drawing.Size(133, 23);
+            this.BtnActivar.TabIndex = 5;
+            this.BtnActivar.Text = "Activar";
+            this.BtnActivar.UseVisualStyleBackColor = true;
+            // 
+            // BtnDesactivar
+            // 
+            this.BtnDesactivar.Location = new System.Drawing.Point(581, 357);
+            this.BtnDesactivar.Name = "BtnDesactivar";
+            this.BtnDesactivar.Size = new System.Drawing.Size(133, 23);
+            this.BtnDesactivar.TabIndex = 6;
+            this.BtnDesactivar.Text = "Desactivar";
+            this.BtnDesactivar.UseVisualStyleBackColor = true;
+            // 
+            // BtnEliminar
+            // 
+            this.BtnEliminar.Location = new System.Drawing.Point(784, 357);
+            this.BtnEliminar.Name = "BtnEliminar";
+            this.BtnEliminar.Size = new System.Drawing.Size(133, 23);
+            this.BtnEliminar.TabIndex = 7;
+            this.BtnEliminar.Text = "Eliminar";
+            this.BtnEliminar.UseVisualStyleBackColor = true;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
+            // 
             // FrmCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,5 +334,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider ErrorIcons;
         private System.Windows.Forms.Button BtnActualizar;
+        private System.Windows.Forms.Button BtnEliminar;
+        private System.Windows.Forms.Button BtnDesactivar;
+        private System.Windows.Forms.Button BtnActivar;
+        private System.Windows.Forms.CheckBox ChkSeleccionar;
     }
 }
