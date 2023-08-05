@@ -272,6 +272,11 @@ namespace Sistema2023.Datos
             return Rpta;
         }
 
+        /// <summary>
+        /// Comprueba si una categoria existe
+        /// </summary>
+        /// <param name="Valor"></param>
+        /// <returns></returns>
         public string Existe(string Valor)
         {
             string Rpta = "";

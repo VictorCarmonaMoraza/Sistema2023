@@ -6,6 +6,9 @@ namespace Sistema2023.Presentacion
 {
     public partial class FrmCategoria : Form
     {
+
+        private string NombreAnt;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -25,6 +28,7 @@ namespace Sistema2023.Presentacion
             {
                 DgvListado.DataSource = NCategoria.Listar();
                 this.Formato();
+                this.Limpiar();
                 LblTotal.Text = "Total registros: " + Convert.ToString(DgvListado.RowCount);
 
             }
@@ -63,6 +67,7 @@ namespace Sistema2023.Presentacion
             TxtId.Clear();
             TxtDescripcion.Clear();
             BtnInsertar.Visible = true;
+            BtnActualizar.Visible = false;
             //Limpia todas las cjas de texto que se esten validando
             ErrorIcons.Clear();
         }
@@ -184,6 +189,68 @@ namespace Sistema2023.Presentacion
             this.Limpiar();
             //Volvemos a la pestaña de listado
             TabGeneral.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Vuando hago click sobre un registro lo estoy seleccionando
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.Limpiar();
+            //Hago visible boton Actualizar
+            BtnActualizar.Visible = true;
+            //Oculto boton Insertar
+            BtnInsertar.Visible = false;
+            TxtId.Text = Convert.ToString(DgvListado.CurrentRow.Cells["ID"].Value);
+            this.NombreAnt = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
+            TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
+            TxtDescripcion.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Descripcion"].Value);
+            //Pasar a la pantalla de mantenimiento
+            TabGeneral.SelectedIndex = 1;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnActualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string Rpta = "";
+                if (TxtNombre.Text == string.Empty || TxtId.Text == string.Empty)
+                {
+                    MensajeError("Faltan algunos datos. Seran remarcados");
+                    //Nos remarcara solo el nombre porque ID esta oculto
+                    ErrorIcons.SetError(TxtNombre, "Ingrese un nombre");
+                }
+                else
+                {
+                    Rpta = NCategoria.Actualizar(Convert.ToInt32(TxtId.Text), this.NombreAnt, TxtNombre.Text.Trim(), TxtDescripcion.Text.Trim());
+                    if (Rpta.Equals("OK"))
+                    {
+                        this.MensajeOK("Se actualizo de forma correcta el registro");
+                        //Limpiamos las cajas de textBox
+                        this.Limpiar();
+                        //Volvemos a listar de nuevo
+                        this.Listar();
+                        //Volvemos a la pestaña de listado
+                        TabGeneral.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        this.MensajeError(Rpta);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+                throw;
+            }
         }
     }
     #endregion Eventos

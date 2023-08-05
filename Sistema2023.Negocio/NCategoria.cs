@@ -42,27 +42,50 @@ namespace Sistema2023.Negocio
             }
         }
 
-        public static string Actualizar(int Id, string Nombre, string Descripcion)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="NombreAnt">Nombre anterior</param>
+        /// <param name="Nombre">Nombre Actual</param>
+        /// <param name="Descripcion"></param>
+        /// <returns></returns>
+        public static string Actualizar(int Id, string NombreAnt, string Nombre, string Descripcion)
         {
             DCategoria Datos = new DCategoria();
+            Categoria categoria = new Categoria();
 
-            //Comrpuebo si exite la categoria
-            string Existe = Datos.Existe(Nombre);
 
-            //Validamos el paremtro existe
-            if (Existe.Equals("1"))
+
+            //NombreAnt es el nombre que viene de BBDD
+            //Nombre es el nombre que tiene la caja de texto,escrito por el usuario 
+            if (NombreAnt.Equals(Nombre))
             {
-                return "La categoria ya existe";
-            }
-            else{
-                Categoria categoria = new Categoria()
-                {
-                    IdCategoria = Id,
-                    Nombre = Nombre,
-                    Descripcion = Descripcion
-                };
+                categoria.IdCategoria = Id;
+                categoria.Nombre = Nombre;
+                categoria.Descripcion = Descripcion;
+
                 return Datos.Actualizar(categoria);
             }
+            else
+            {
+                //Comrpuebo si exite la categoria
+                string Existe = Datos.Existe(Nombre);
+                //Validamos el paremtro existe
+                if (Existe.Equals("1"))
+                {
+                    return "La categoria ya existe";
+                }
+                else
+                {
+                    categoria.IdCategoria = Id;
+                    categoria.Nombre = Nombre;
+                    categoria.Descripcion = Descripcion;
+
+                    return Datos.Actualizar(categoria);
+                }
+            }
+
         }
 
         public static string Eliminar(int Id)
