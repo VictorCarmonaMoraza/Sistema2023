@@ -1,5 +1,6 @@
 ﻿using Sistema2023.Negocio;
 using System;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace Sistema2023.Presentacion
@@ -16,7 +17,7 @@ namespace Sistema2023.Presentacion
         {
             InitializeComponent();
         }
- 
+
         #region metodos no asociados a eventos
 
         /// <summary>
@@ -304,12 +305,12 @@ namespace Sistema2023.Presentacion
             {
                 DialogResult Opcion;
                 Opcion = MessageBox.Show("Realmente deseas eliminar el(los) registro(s)?", "Sistema de ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (Opcion ==  DialogResult.OK)
+                if (Opcion == DialogResult.OK)
                 {
                     int Codigo;
                     string Rpta = "";
 
-                    foreach(DataGridViewRow row in DgvListado.Rows)
+                    foreach (DataGridViewRow row in DgvListado.Rows)
                     {
                         if (Convert.ToBoolean(row.Cells[0].Value))
                         {
@@ -319,6 +320,99 @@ namespace Sistema2023.Presentacion
                             if (Rpta.Equals("OK"))
                             {
                                 this.MensajeOK("Se elimino el registro: " + Convert.ToString(row.Cells[2].Value));
+                            }
+                            else
+                            {
+                                this.MensajeError(Rpta);
+                            }
+                        }
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Activa uno o varios registros
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnActivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas activar el(los) registro(s)?", "Sistema de ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                //Estamos activando el o los registros
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+                    string Rpta = "";
+
+                    foreach (DataGridViewRow row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            Rpta = NCategoria.Activar(Codigo);
+
+                            if (Rpta.Equals("OK"))
+                            {
+                                this.MensajeOK("Se activo el registro" + Convert.ToString(row.Cells[2].Value));
+                            }
+                            else
+                            {
+                                this.MensajeError(Rpta);
+                            }
+                        }
+
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Desactiva uno o varios registros
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnDesactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas desactivar el(los) registro(s)?", "Sistema de ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                //Estamos activando el o los registros
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+                    string Rpta = "";
+
+                    foreach (DataGridViewRow row in DgvListado.Rows)
+                    {
+
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            Rpta = NCategoria.Desactivar(Codigo);
+
+                            if (Rpta.Equals("OK"))
+                            {
+                                this.MensajeOK("Se desactivo el registro" + Convert.ToString(row.Cells[2].Value));
                             }
                             else
                             {

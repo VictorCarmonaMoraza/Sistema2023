@@ -31,12 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.TabGeneral = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.BtnEliminar = new System.Windows.Forms.Button();
+            this.BtnDesactivar = new System.Windows.Forms.Button();
+            this.BtnActivar = new System.Windows.Forms.Button();
+            this.ChkSeleccionar = new System.Windows.Forms.CheckBox();
             this.BtnBuscar = new System.Windows.Forms.Button();
             this.TxtBuscar = new System.Windows.Forms.TextBox();
             this.LblTotal = new System.Windows.Forms.Label();
             this.DgvListado = new System.Windows.Forms.DataGridView();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.BtnActualizar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnInsertar = new System.Windows.Forms.Button();
@@ -46,11 +51,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ErrorIcons = new System.Windows.Forms.ErrorProvider(this.components);
-            this.BtnActualizar = new System.Windows.Forms.Button();
-            this.ChkSeleccionar = new System.Windows.Forms.CheckBox();
-            this.BtnActivar = new System.Windows.Forms.Button();
-            this.BtnDesactivar = new System.Windows.Forms.Button();
-            this.BtnEliminar = new System.Windows.Forms.Button();
             this.TabGeneral.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListado)).BeginInit();
@@ -81,16 +81,57 @@
             this.tabPage1.Controls.Add(this.DgvListado);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1409, 390);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Listado";
+            // 
+            // BtnEliminar
+            // 
+            this.BtnEliminar.Location = new System.Drawing.Point(784, 357);
+            this.BtnEliminar.Name = "BtnEliminar";
+            this.BtnEliminar.Size = new System.Drawing.Size(133, 23);
+            this.BtnEliminar.TabIndex = 7;
+            this.BtnEliminar.Text = "Eliminar";
+            this.BtnEliminar.UseVisualStyleBackColor = true;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
+            // 
+            // BtnDesactivar
+            // 
+            this.BtnDesactivar.Location = new System.Drawing.Point(581, 357);
+            this.BtnDesactivar.Name = "BtnDesactivar";
+            this.BtnDesactivar.Size = new System.Drawing.Size(133, 23);
+            this.BtnDesactivar.TabIndex = 6;
+            this.BtnDesactivar.Text = "Desactivar";
+            this.BtnDesactivar.UseVisualStyleBackColor = true;
+            this.BtnDesactivar.Click += new System.EventHandler(this.BtnDesactivar_Click);
+            // 
+            // BtnActivar
+            // 
+            this.BtnActivar.Location = new System.Drawing.Point(340, 357);
+            this.BtnActivar.Name = "BtnActivar";
+            this.BtnActivar.Size = new System.Drawing.Size(133, 23);
+            this.BtnActivar.TabIndex = 5;
+            this.BtnActivar.Text = "Activar";
+            this.BtnActivar.UseVisualStyleBackColor = true;
+            this.BtnActivar.Click += new System.EventHandler(this.BtnActivar_Click);
+            // 
+            // ChkSeleccionar
+            // 
+            this.ChkSeleccionar.AutoSize = true;
+            this.ChkSeleccionar.Location = new System.Drawing.Point(19, 357);
+            this.ChkSeleccionar.Name = "ChkSeleccionar";
+            this.ChkSeleccionar.Size = new System.Drawing.Size(82, 17);
+            this.ChkSeleccionar.TabIndex = 4;
+            this.ChkSeleccionar.Text = "Seleccionar";
+            this.ChkSeleccionar.UseVisualStyleBackColor = true;
+            this.ChkSeleccionar.CheckedChanged += new System.EventHandler(this.ChkSeleccionar_CheckedChanged);
             // 
             // BtnBuscar
             // 
             this.BtnBuscar.BackColor = System.Drawing.Color.SkyBlue;
             this.BtnBuscar.Location = new System.Drawing.Point(414, 5);
-            this.BtnBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.BtnBuscar.Name = "BtnBuscar";
             this.BtnBuscar.Size = new System.Drawing.Size(105, 19);
             this.BtnBuscar.TabIndex = 3;
@@ -102,7 +143,7 @@
             // 
             this.TxtBuscar.BackColor = System.Drawing.Color.PaleTurquoise;
             this.TxtBuscar.Location = new System.Drawing.Point(19, 6);
-            this.TxtBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TxtBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.TxtBuscar.Name = "TxtBuscar";
             this.TxtBuscar.Size = new System.Drawing.Size(374, 20);
             this.TxtBuscar.TabIndex = 2;
@@ -156,10 +197,20 @@
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1409, 390);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mantenimiento";
+            // 
+            // BtnActualizar
+            // 
+            this.BtnActualizar.Location = new System.Drawing.Point(178, 341);
+            this.BtnActualizar.Name = "BtnActualizar";
+            this.BtnActualizar.Size = new System.Drawing.Size(153, 19);
+            this.BtnActualizar.TabIndex = 8;
+            this.BtnActualizar.Text = "Actualizar";
+            this.BtnActualizar.UseVisualStyleBackColor = true;
+            this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
             // label3
             // 
@@ -175,7 +226,7 @@
             // BtnCancelar
             // 
             this.BtnCancelar.Location = new System.Drawing.Point(376, 303);
-            this.BtnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(154, 19);
             this.BtnCancelar.TabIndex = 6;
@@ -186,7 +237,7 @@
             // BtnInsertar
             // 
             this.BtnInsertar.Location = new System.Drawing.Point(178, 303);
-            this.BtnInsertar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnInsertar.Margin = new System.Windows.Forms.Padding(2);
             this.BtnInsertar.Name = "BtnInsertar";
             this.BtnInsertar.Size = new System.Drawing.Size(154, 19);
             this.BtnInsertar.TabIndex = 5;
@@ -197,7 +248,7 @@
             // TxtId
             // 
             this.TxtId.Location = new System.Drawing.Point(421, 57);
-            this.TxtId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TxtId.Margin = new System.Windows.Forms.Padding(2);
             this.TxtId.Name = "TxtId";
             this.TxtId.Size = new System.Drawing.Size(111, 20);
             this.TxtId.TabIndex = 4;
@@ -206,7 +257,7 @@
             // TxtDescripcion
             // 
             this.TxtDescripcion.Location = new System.Drawing.Point(178, 156);
-            this.TxtDescripcion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TxtDescripcion.Margin = new System.Windows.Forms.Padding(2);
             this.TxtDescripcion.Multiline = true;
             this.TxtDescripcion.Name = "TxtDescripcion";
             this.TxtDescripcion.Size = new System.Drawing.Size(354, 87);
@@ -215,7 +266,7 @@
             // TxtNombre
             // 
             this.TxtNombre.Location = new System.Drawing.Point(178, 97);
-            this.TxtNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TxtNombre.Margin = new System.Windows.Forms.Padding(2);
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(354, 20);
             this.TxtNombre.TabIndex = 2;
@@ -243,55 +294,6 @@
             // ErrorIcons
             // 
             this.ErrorIcons.ContainerControl = this;
-            // 
-            // BtnActualizar
-            // 
-            this.BtnActualizar.Location = new System.Drawing.Point(178, 341);
-            this.BtnActualizar.Name = "BtnActualizar";
-            this.BtnActualizar.Size = new System.Drawing.Size(153, 19);
-            this.BtnActualizar.TabIndex = 8;
-            this.BtnActualizar.Text = "Actualizar";
-            this.BtnActualizar.UseVisualStyleBackColor = true;
-            this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
-            // 
-            // ChkSeleccionar
-            // 
-            this.ChkSeleccionar.AutoSize = true;
-            this.ChkSeleccionar.Location = new System.Drawing.Point(19, 357);
-            this.ChkSeleccionar.Name = "ChkSeleccionar";
-            this.ChkSeleccionar.Size = new System.Drawing.Size(82, 17);
-            this.ChkSeleccionar.TabIndex = 4;
-            this.ChkSeleccionar.Text = "Seleccionar";
-            this.ChkSeleccionar.UseVisualStyleBackColor = true;
-            this.ChkSeleccionar.CheckedChanged += new System.EventHandler(this.ChkSeleccionar_CheckedChanged);
-            // 
-            // BtnActivar
-            // 
-            this.BtnActivar.Location = new System.Drawing.Point(340, 357);
-            this.BtnActivar.Name = "BtnActivar";
-            this.BtnActivar.Size = new System.Drawing.Size(133, 23);
-            this.BtnActivar.TabIndex = 5;
-            this.BtnActivar.Text = "Activar";
-            this.BtnActivar.UseVisualStyleBackColor = true;
-            // 
-            // BtnDesactivar
-            // 
-            this.BtnDesactivar.Location = new System.Drawing.Point(581, 357);
-            this.BtnDesactivar.Name = "BtnDesactivar";
-            this.BtnDesactivar.Size = new System.Drawing.Size(133, 23);
-            this.BtnDesactivar.TabIndex = 6;
-            this.BtnDesactivar.Text = "Desactivar";
-            this.BtnDesactivar.UseVisualStyleBackColor = true;
-            // 
-            // BtnEliminar
-            // 
-            this.BtnEliminar.Location = new System.Drawing.Point(784, 357);
-            this.BtnEliminar.Name = "BtnEliminar";
-            this.BtnEliminar.Size = new System.Drawing.Size(133, 23);
-            this.BtnEliminar.TabIndex = 7;
-            this.BtnEliminar.Text = "Eliminar";
-            this.BtnEliminar.UseVisualStyleBackColor = true;
-            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
             // FrmCategoria
             // 
